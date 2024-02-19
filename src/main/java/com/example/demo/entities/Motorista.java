@@ -23,22 +23,25 @@ public class Motorista implements Serializable{
 	private String telefone;
 	private String cpf;
 	private String carteira;
-	private String senha;
-	private Integer num_acesso;
+	private String senha = "root";
+	private Integer num_acesso = 0;
+	
+	private Carro carro;
 	
 	public Motorista() {
 	}
 
 	public Motorista(Long id, String nome, String email, String telefone, String cpf, String carteira, String senha,
-			Integer num_acesso) {
+			Integer num_acesso, Carro carro) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
 		this.cpf = cpf;
 		this.carteira = carteira;
-		this.senha = senha;
-		this.num_acesso = num_acesso;
+		this.senha = senha != null ? senha : this.senha;
+		this.num_acesso = num_acesso != null ? num_acesso : this.num_acesso;
+		this.carro = carro;
 	}
 
 	public Long getId() {
@@ -103,6 +106,14 @@ public class Motorista implements Serializable{
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public Carro getCarro() {
+		return carro;
+	}
+
+	public void setCarro(Carro carro) {
+		this.carro = carro;
 	}
 
 	@Override

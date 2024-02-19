@@ -15,7 +15,7 @@ public class MotoristaDTO implements Serializable {
 	private String cpf;
 	private String carteira;
 	
-	private String carro;
+	private Long carro;
 
 	public MotoristaDTO() {
 		
@@ -28,7 +28,7 @@ public class MotoristaDTO implements Serializable {
 		this.telefone = mot.getTelefone();
 		this.cpf = mot.getCpf();
 		this.carteira = mot.getCarteira();
-		//this.carro = mot.getCarro() != null ? mot.getCarro().getId() : null;
+		this.carro = mot.getCarro() != null ? mot.getCarro().getId() : null;
 	}
 
 	public Long getId() {
@@ -63,11 +63,11 @@ public class MotoristaDTO implements Serializable {
 		this.carteira = carteira;
 	}
 
-	public String getCarro() {
+	public Long getCarro() {
 		return carro;
 	}
 
-	public void setCarro(String carro) {
+	public void setCarro(Long carro) {
 		this.carro = carro;
 	}
 
