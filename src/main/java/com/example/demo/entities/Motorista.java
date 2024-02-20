@@ -2,10 +2,14 @@ package com.example.demo.entities;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,7 +30,10 @@ public class Motorista implements Serializable{
 	private String senha = "root";
 	private Integer num_acesso = 0;
 	
-	private Carro carro;
+	@JsonIgnore
+	@OneToOne
+	@MapsId
+	private Carro carro; //Motorista pertence a um Carro
 	
 	public Motorista() {
 	}

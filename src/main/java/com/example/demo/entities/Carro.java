@@ -5,10 +5,12 @@ import java.util.Objects;
 
 import com.example.demo.enums.CarColor;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,18 +28,18 @@ public class Carro implements Serializable{
 	private String placa;
 	private Integer cor;
 	
-	private Motorista motorista;
+	@OneToOne(mappedBy = "carro", cascade = CascadeType.ALL)
+	private Motorista motorista; //Um Carro tem um Motorista
 	
 	public Carro() {
 	}
 
-	public Carro(Long id, String modelo, Integer ano, String placa, CarColor cor, Motorista motorista) {
+	public Carro(Long id, String modelo, Integer ano, String placa, CarColor cor) {
 		this.id = id;
 		this.modelo = modelo;
 		this.ano = ano;
 		this.placa = placa;
 		this.cor = cor.getCode();
-		this.motorista = motorista;
 	}
 
 	public Long getId() {
@@ -77,7 +79,8 @@ public class Carro implements Serializable{
 	}
 
 	public void setCor(CarColor cor) {
-		this.cor = cor.getCode();
+		if( cor != null )
+			this.cor = cor.getCode();
 	}
 
 	public Motorista getMotorista() {
