@@ -1,6 +1,8 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -9,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -34,6 +37,9 @@ public class Motorista implements Serializable{
 	@OneToOne
 	@MapsId
 	private Carro carro; //Motorista pertence a um Carro
+	
+	@OneToMany(mappedBy = "motorista")
+	private Set<Registro> registros = new HashSet<>();
 	
 	public Motorista() {
 	}
@@ -123,10 +129,19 @@ public class Motorista implements Serializable{
 		this.carro = carro;
 	}
 
+	public Set<Registro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(Set<Registro> registros) {
+		this.registros = registros;
+	}
+
 	@Override
 	public String toString() {
 		return "Motorista [id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", cpf=" + cpf
-				+ ", carteira=" + carteira + ", senha=" + senha + ", num_acesso=" + num_acesso + "]";
+				+ ", carteira=" + carteira + ", senha=" + senha + ", num_acesso=" + num_acesso + ", carro=" + carro
+				+ ", registros=" + registros + "]";
 	}
 	
 }

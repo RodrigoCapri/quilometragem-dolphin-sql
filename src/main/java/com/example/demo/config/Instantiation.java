@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +9,19 @@ import org.springframework.context.annotation.Configuration;
 
 import com.example.demo.entities.Carro;
 import com.example.demo.entities.Motorista;
+import com.example.demo.entities.Registro;
 import com.example.demo.enums.CarColor;
 import com.example.demo.repositories.CarroRepository;
+import com.example.demo.repositories.RegistroRepository;
 
 @Configuration
 public class Instantiation implements CommandLineRunner{
 	
 	@Autowired
 	private CarroRepository car_repo;
+	
+	@Autowired
+	private RegistroRepository reg_repo;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -31,6 +37,11 @@ public class Instantiation implements CommandLineRunner{
 		car1.setMotorista(mot1);
 		car3.setMotorista(mot2);
 		car_repo.saveAll(Arrays.asList(car1, car3));
+		
+		Registro reg1 = new Registro(null, "102337", "Para casa", Instant.parse("2019-06-20T19:53:07Z"), "N/A",  car1, mot1);
+		Registro reg2 = new Registro(null, "102380", "Para Maltaria", Instant.parse("2019-06-21T06:30:07Z"), "N/A", car1, mot1);
+		reg_repo.saveAll(Arrays.asList(reg1, reg2));
+		
 		
 	}
 	

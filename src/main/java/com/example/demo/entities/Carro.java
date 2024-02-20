@@ -1,7 +1,9 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.example.demo.enums.CarColor;
 
@@ -10,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -30,6 +33,9 @@ public class Carro implements Serializable{
 	
 	@OneToOne(mappedBy = "carro", cascade = CascadeType.ALL)
 	private Motorista motorista; //Um Carro tem um Motorista
+	
+	@OneToMany(mappedBy = "carro")
+	private Set<Registro> registros = new HashSet<>();
 	
 	public Carro() {
 	}
@@ -91,6 +97,14 @@ public class Carro implements Serializable{
 		this.motorista = motorista;
 	}
 
+	public Set<Registro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(Set<Registro> registros) {
+		this.registros = registros;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -111,7 +125,7 @@ public class Carro implements Serializable{
 	@Override
 	public String toString() {
 		return "Carro [id=" + id + ", modelo=" + modelo + ", ano=" + ano + ", placa=" + placa + ", cor=" + cor
-				+ ", motorista=" + motorista + "]";
+				+ ", motorista=" + motorista + ", registros=" + registros + "]";
 	}
 	
 }
