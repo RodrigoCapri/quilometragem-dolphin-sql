@@ -1,9 +1,13 @@
 package com.example.demo.dto;
 
+import java.io.Serializable;
+
 import com.example.demo.entities.Carro;
 import com.example.demo.enums.CarColor;
 
-public class CarroDTO {
+public class CarroDTO implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	
