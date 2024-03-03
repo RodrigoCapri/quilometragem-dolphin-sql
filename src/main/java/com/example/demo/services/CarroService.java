@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dto.CarroDTO;
 import com.example.demo.entities.Carro;
 import com.example.demo.entities.Motorista;
+import com.example.demo.entities.Registro;
 import com.example.demo.repositories.CarroRepository;
 import com.example.demo.repositories.MotoristaRepository;
+import com.example.demo.repositories.RegistroRepository;
 import com.example.demo.services.exceptions.DatabaseException;
 import com.example.demo.services.exceptions.ResourceNotFoundException;
 
@@ -26,6 +28,9 @@ public class CarroService {
 	
 	@Autowired
 	private MotoristaRepository mot_repository;
+	
+	@Autowired
+	private RegistroRepository reg_repo;
 	
 	public List<Carro> findAll(){
 		return repository.findAll();
@@ -67,6 +72,15 @@ public class CarroService {
 		}catch(DataIntegrityViolationException e) { //Violação de integridade de dados
 			throw new DatabaseException(e.getMessage()); 
 		}
+	}
+	
+	public List<Registro> getRegistros(Long id){
+		
+		Carro car = repository.findById(id).orElseThrow( () -> new ResourceNotFoundException(id) );
+		
+		List<Registro> list = reg_repo.findByCarro(car);
+		
+		return list;
 	}
 	
 	public Carro fromDTO(CarroDTO objDTO) {

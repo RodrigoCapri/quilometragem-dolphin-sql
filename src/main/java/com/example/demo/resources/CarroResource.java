@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.dto.CarroDTO;
+import com.example.demo.dto.RegistroDTO;
 import com.example.demo.entities.Carro;
+import com.example.demo.entities.Registro;
 import com.example.demo.enums.CarColor;
 import com.example.demo.services.CarroService;
 
@@ -78,6 +80,16 @@ public class CarroResource {
 		this.service.delete(id);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/{id}/registros")
+	public ResponseEntity< List<RegistroDTO> > getRegistros(@PathVariable Long id){
+		
+		List<Registro> list = service.getRegistros(id);
+		
+		List<RegistroDTO> listDTO = list.stream().map( obj -> new RegistroDTO(obj) ).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(listDTO);
 	}
 	
 }

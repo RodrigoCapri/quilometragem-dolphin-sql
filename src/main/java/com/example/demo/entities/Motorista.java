@@ -38,6 +38,7 @@ public class Motorista implements Serializable{
 	@MapsId
 	private Carro carro; //Motorista pertence a um Carro
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "motorista")
 	private Set<Registro> registros = new HashSet<>();
 	

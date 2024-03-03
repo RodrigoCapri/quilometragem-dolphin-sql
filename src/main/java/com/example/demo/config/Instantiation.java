@@ -23,6 +23,9 @@ public class Instantiation implements CommandLineRunner{
 	@Autowired
 	private RegistroRepository reg_repo;
 	
+//	@Autowired
+//	private MotoristaRepository mot_repo;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
