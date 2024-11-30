@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import com.example.demo.entities.Registro;
 import com.example.demo.services.MotoristaService;
 
 @RestController
+//@CrossOrigin(origins = "*")
 @RequestMapping(value = "/motoristas")
 public class MotoristaResource {
 	
@@ -38,7 +40,7 @@ public class MotoristaResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity< Motorista > findById(@PathVariable Long id){
 		
 		Motorista mot = service.findById(id);

@@ -6,6 +6,8 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.demo.entities.Carro;
 import com.example.demo.entities.Motorista;
@@ -15,7 +17,7 @@ import com.example.demo.repositories.CarroRepository;
 import com.example.demo.repositories.RegistroRepository;
 
 @Configuration
-public class Instantiation implements CommandLineRunner{
+public class Instantiation implements CommandLineRunner,WebMvcConfigurer {
 	
 	@Autowired
 	private CarroRepository car_repo;
@@ -47,5 +49,13 @@ public class Instantiation implements CommandLineRunner{
 		
 		
 	}
+	
+	@Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*") // Ou utilize *, mas não é seguro
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("Authorization", "Content-Type");
+    }
 	
 }
